@@ -18,12 +18,14 @@
 // 8 bit address format
 
 
-#define TSL2561_COMMAND_STATE_CMD   		0x10
-#define TSL2561_COMMAND_STATE_CLEAR  		0x20
-#define TSL2561_COMMAND_STATE_WORD  		0x40
-#define TSL2561_COMMAND_STATE_BLOCK  		0x80
+#define TSL2561_COMMAND_STATE_CMD   		0x80
+#define TSL2561_COMMAND_STATE_CLEAR  		0x40
+#define TSL2561_COMMAND_STATE_WORD  		0x20
+#define TSL2561_COMMAND_STATE_BLOCK  		0x10
 
-#define TSL2561_MAX_DELAY HAL_MAX_DELAY
+#define TSL2561_POWER_ON_STATE				0x03
+
+#define TSL2561_MAX_DELAY 					HAL_MAX_DELAY
 
 /*
  * Register Map
@@ -59,6 +61,7 @@ typedef struct
  * Library Functions
  */
 HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint8_t sensorAddress);
+HAL_StatusTypeDef TSL2561_BasicRead(TSL2561* tsl, uint16_t* value);
 
 /*
  * Low Level Functions
