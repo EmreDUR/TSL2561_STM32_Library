@@ -22,6 +22,12 @@ HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint
 
 HAL_StatusTypeDef TSL2561_BasicRead(TSL2561* tsl, uint16_t* value)
 {
+	uint8_t data0Low, data0High;
+	TSL2561_ReadByte(tsl, (TSL2561_COMMAND_STATE_CMD|TSL2561_REG_DATA0LOW),	&data0Low);
+	TSL2561_ReadByte(tsl, (TSL2561_COMMAND_STATE_CMD|TSL2561_REG_DATA0HIGH), &data0High);
+
+	*value = data0High * 256 + data0Low;
+
 	return HAL_OK;
 }
 
