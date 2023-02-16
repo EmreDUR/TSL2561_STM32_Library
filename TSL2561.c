@@ -15,6 +15,8 @@ HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint
 	//Pass the sensor address to the sensor struct
 	tsl->address = sensorAddress << 1;
 
+	//Power on sequence needs to be implemented!
+
 	return HAL_OK;
 }
 
