@@ -15,7 +15,15 @@
 /*
  * Defines
  */
-#define TSL2561_ADDRESS 					(0x39 << 1)
+// 8 bit address format
+
+
+#define TSL2561_COMMAND_STATE_CMD   		0x10
+#define TSL2561_COMMAND_STATE_CLEAR  		0x20
+#define TSL2561_COMMAND_STATE_WORD  		0x40
+#define TSL2561_COMMAND_STATE_BLOCK  		0x80
+
+#define TSL2561_MAX_DELAY HAL_MAX_DELAY
 
 /*
  * Register Map
@@ -34,9 +42,28 @@
 #define TSL2561_REG_DATA1LOW				0x0E
 #define TSL2561_REG_DATA1HIGH				0x0F
 
-#define TSL2561_COMMAND_STATE_CMD   		0x10
-#define TSL2561_COMMAND_STATE_CLEAR  		0x20
-#define TSL2561_COMMAND_STATE_WORD  		0x40
-#define TSL2561_COMMAND_STATE_BLOCK  		0x80
+/*
+ * Sensor Struct
+ */
+typedef struct
+{
+	//I2C Handle used for the sensor
+	I2C_HandleTypeDef* i2cHandle;
+
+	//Sensor address
+	uint8_t address;
+
+} TSL2561;
+
+/*
+ * Library Functions
+ */
+HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint8_t sensorAddress);
+
+/*
+ * Low Level Functions
+ */
+HAL_StatusTypeDef TSL2561_WriteByte(TSL2561* tsl, uint8_t reg, uint8_t value);
+HAL_StatusTypeDef TSL2561_ReadByte(TSL2561* tsl, uint8_t reg, uint8_t* value);
 
 #endif /* TSL2561_I2C_DRIVER_H_ */
