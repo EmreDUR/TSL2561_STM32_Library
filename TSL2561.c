@@ -20,16 +20,25 @@ HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint
 
 }
 
+HAL_StatusTypeDef TSL2561_GetLux(TSL2561* tsl, uint8_t* luxValue)
+{
+	return HAL_OK;
+}
+
 HAL_StatusTypeDef TSL2561_ReadData(TSL2561* tsl, uint16_t* data0Val, uint16_t* data1Val)
 {
+	//Variables for storing received data
 	uint8_t data0Low, data0High, data1Low, data1High;
 
+	//Read Data0 registers
 	TSL2561_ReadByte(tsl, (TSL2561_COMMAND_STATE_CMD|TSL2561_REG_DATA0LOW),	&data0Low);
 	TSL2561_ReadByte(tsl, (TSL2561_COMMAND_STATE_CMD|TSL2561_REG_DATA0HIGH), &data0High);
 
+	//Read Data1 registers
 	TSL2561_ReadByte(tsl, (TSL2561_COMMAND_STATE_CMD|TSL2561_REG_DATA1LOW),	&data1Low);
 	TSL2561_ReadByte(tsl, (TSL2561_COMMAND_STATE_CMD|TSL2561_REG_DATA1HIGH), &data1High);
 
+	//Combine Data register values into single 16 bit variable
 	*data0Val = data0High * 256 + data0Low;
 	*data1Val = data1High * 256 + data1Low;
 

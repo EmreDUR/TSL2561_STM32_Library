@@ -61,12 +61,13 @@ typedef struct
  * Library Functions
  */
 HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint8_t sensorAddress);
-HAL_StatusTypeDef TSL2561_ReadData(TSL2561* tsl, uint16_t* data0Val, uint16_t* data1Val);
+HAL_StatusTypeDef TSL2561_GetLux(TSL2561* tsl, uint8_t* luxValue);
 
 /*
  * Low Level Functions
  */
 HAL_StatusTypeDef TSL2561_WriteByte(TSL2561* tsl, uint8_t reg, uint8_t value);
 HAL_StatusTypeDef TSL2561_ReadByte(TSL2561* tsl, uint8_t reg, uint8_t* value);
+HAL_StatusTypeDef TSL2561_ReadData(TSL2561* tsl, uint16_t* data0Val, uint16_t* data1Val);
 
 #endif /* TSL2561_I2C_DRIVER_H_ */
