@@ -20,8 +20,18 @@ HAL_StatusTypeDef TSL2561_Init(TSL2561* tsl, I2C_HandleTypeDef* userHandle, uint
 
 }
 
-HAL_StatusTypeDef TSL2561_GetLux(TSL2561* tsl, uint8_t* luxValue)
+HAL_StatusTypeDef TSL2561_GetLux(TSL2561* tsl, float* luxValue)
 {
+	//Variables for storing Data registers
+	uint16_t data0, data1;
+
+	//Get the values from the data registers
+	TSL2561_ReadData(tsl, &data0, &data1);
+
+	//T, FN, and CL Package calculation
+	*luxValue = (float)data1/(float)data0;
+
+
 	return HAL_OK;
 }
 
