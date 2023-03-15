@@ -10,19 +10,17 @@
 
 //Include HAL Library by including the main header from the created project
 #include "main.h"
-
+#include "math.h"
 
 /*
  * Defines
  */
 // 8 bit address format
 
-
 #define TSL2561_COMMAND_STATE_CMD   		0x80
 #define TSL2561_COMMAND_STATE_CLEAR  		0x40
 #define TSL2561_COMMAND_STATE_WORD  		0x20
 #define TSL2561_COMMAND_STATE_BLOCK  		0x10
-
 #define TSL2561_POWER_ON_STATE				0x03
 
 #define TSL2561_MAX_DELAY 					HAL_MAX_DELAY

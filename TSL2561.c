@@ -29,8 +29,24 @@ HAL_StatusTypeDef TSL2561_GetLux(TSL2561* tsl, float* luxValue)
 	TSL2561_ReadData(tsl, &data0, &data1);
 
 	//T, FN, and CL Package calculation
-	*luxValue = (float)data1/(float)data0;
+	//Calculate the ratio of the photodiodes
+	float ratio = ((float)data1) / ((float)data0);
 
+	//Calculating Lux
+	//Ratio between 0 and 0.50
+	if(ratio <= 0.50) *luxValue = 0.0304 * data0 - 0.062* data0 * pow(ratio, 1.4);
+
+	//If the ratio is between 0.51 and 0.61
+	else if(ratio <= 0.61) *luxValue = 0.0224 * data0 - 0.031 * data1;
+
+	//If the ratio is between 0.62 and 0.81
+	else if(ratio <= 0.80) *luxValue = 0.0128 * data0 - 0.0153 * data1;
+
+	//If the ratio is between 0.82 and 1.39
+	else if(ratio <= 1.30) *luxValue = 0.00146 * data0 - 0.00112 * data1;
+
+	//If the ratio is bigger than 1.30
+	else *luxValue = 0;
 
 	return HAL_OK;
 }
