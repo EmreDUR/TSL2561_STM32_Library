@@ -44,7 +44,9 @@ The sensor address can be either 0x39(default), 0x29 or 0x49 based on the ADDR p
 int main(void)
 {
   TSL2561 tslSensor; 
-  float luxValue; 
+  float luxValue;
+  
+  char* displayBuffer;
   
   if (HAL_I2C_IsDeviceReady(&hi2c1, TSL2561_ADDR, 1, HAL_MAX_DELAY) == HAL_OK) 
   { 
