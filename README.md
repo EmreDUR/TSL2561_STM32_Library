@@ -12,11 +12,6 @@ The Library is created using STM32 HAL Libraries and it is intended to be used s
 -   Low level I2C Read and Write functions to access the sensor registers.
 -   Easy to integrate with any  STM32 HAL  based project.
 
-## Dependencies
-
--   STM32 HAL Library
--   math.h for lux value calculation
-
 ## Usage
 
 1.  Include the "TSL2561.h" header file in your  source file
